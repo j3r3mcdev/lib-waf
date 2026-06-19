@@ -1,24 +1,41 @@
 import { WAF } from "../../src/core/waf";
 import { WafDetector, WafProvider } from "../../src/core/types";
 
-class MockProvider implements WafProvider {
-  name = "mock";
+class MockGeoProvider implements WafProvider {
+  name = "geo";
   init = jest.fn();
+  lookup = jest.fn().mockResolvedValue({
+    country: "France",
+    countryCode: "FR",
+  });
 }
 
-const mockDetector: WafDetector = {
-  name: "mock",
-  run: jest
-    .fn()
-    .mockResolvedValue([{ detector: "mock", severity: 7, message: "ok" }]),
+const geoDetector: WafDetector = {
+  name: "geo-detector",
+  run: async (ctx) => {
+    const geo = ctx.getProvider<MockGeoProvider>("geo");
+    const info = await geo?.lookup("1.1.1.1");
+
+    if (info?.countryCode === "FR") {
+      return [
+        {
+          detector: "geo-detector",
+          severity: 2,
+          message: "IP française",
+        },
+      ];
+    }
+
+    return [];
+  },
 };
 
-describe("WAF API", () => {
-  test("évaluation complète", async () => {
+describe("WAF + Providers integration", () => {
+  test("un détecteur peut utiliser un provider", async () => {
     const waf = new WAF();
 
-    waf.registerProvider("mock", new MockProvider());
-    waf.registerDetector(mockDetector);
+    waf.registerProvider("geo", new MockGeoProvider());
+    waf.registerDetector(geoDetector);
 
     await waf.init();
 
@@ -29,7 +46,7 @@ describe("WAF API", () => {
       headers: {},
     });
 
-    expect(decision.score).toBe(7);
-    expect(decision.action).toBe("allow");
+    expect(decision.score).toBe(2);
+    expect(decision.findings.length).toBe(1);
   });
 });
