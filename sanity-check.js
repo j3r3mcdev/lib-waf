@@ -1,64 +1,59 @@
-#!/usr/bin/env node
 const { execSync } = require("child_process");
 
-function run(cmd, label) {
-  try {
-    console.log(`\n🔍  ${label}...`);
-    execSync(cmd, { stdio: "inherit" });
-    console.log(`✔️  ${label} OK`);
-  } catch (err) {
-    console.error(`❌  ${label} FAILED`);
-    process.exit(1);
-  }
-}
-
-function gitIsClean() {
-  try {
-    const status = execSync("git status --porcelain").toString().trim();
-    return status.length === 0;
-  } catch {
-    return false;
-  }
-}
-
-function getBranch() {
-  try {
-    return execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
-  } catch {
-    return "unknown";
-  }
-}
+const isLite = process.argv.includes("--no-git");
 
 console.log("====================================");
 console.log("     🧪 SANITY CHECK (WAF LIB)      ");
 console.log("====================================");
 
-// 0) Clean dist
-run("rimraf dist", "Clean dist");
-
-// 1) TypeScript typecheck
-run("tsc --noEmit", "TypeScript");
-
-// 2) Build
-run("npm run build", "Build");
-
-// 3) Tests Jest
-run("npm test --silent", "Tests Jest");
-
-// 4) Git branch check
-console.log(`\n🔍  Git Status...`);
-const branch = getBranch();
-
-if (!gitIsClean()) {
-  console.error(
-    `❌  Git FAILED — La branche '${branch}' contient des modifications non commit.`,
-  );
-  console.error("➡️  Fais un commit ou stash avant de lancer le sanity check.");
-  process.exit(1);
+if (isLite) {
+  console.log("           ⚡ LITE MODE ⚡");
+  console.log("   (Git verification is disabled)");
 }
 
-console.log(`✔️  Git OK — Branche propre (${branch})`);
+//
+// CLEAN DIST
+//
+console.log("\n🔍  Clean dist...");
+execSync("npm run clean", { stdio: "inherit" });
+console.log("✔️  Clean dist OK");
 
-console.log("\n====================================");
-console.log("   ✅ SANITY CHECK COMPLETED (OK)    ");
-console.log("====================================\n");
+//
+// TYPESCRIPT
+//
+console.log("\n🔍  TypeScript...");
+execSync("tsc --noEmit", { stdio: "inherit" });
+console.log("✔️  TypeScript OK");
+
+//
+// BUILD
+//
+console.log("\n🔍  Build...");
+execSync("npm run build", { stdio: "inherit" });
+console.log("✔️  Build OK");
+
+//
+// TESTS
+//
+console.log("\n🔍  Tests Jest...");
+execSync("npm test", { stdio: "inherit" });
+console.log("✔️  Tests Jest OK");
+
+//
+// GIT CHECK (FULL ONLY)
+//
+if (!isLite) {
+  console.log("\n🔍  Git Status...");
+  const gitStatus = execSync("git status --porcelain").toString().trim();
+
+  if (gitStatus !== "") {
+    console.error(
+      "❌  Git FAILED — La branche contient des modifications non commit.",
+    );
+    process.exit(1);
+  }
+
+  console.log("✔️  Git Status OK");
+}
+
+console.log("\n🎉 SANITY CHECK COMPLETED");
