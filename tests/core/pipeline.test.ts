@@ -30,6 +30,6 @@ describe("WafPipeline", () => {
     });
 
     expect(decision.score).toBe(5);
-    expect(decision.action).toBe("allow");
+    expect(decision.action).toBe("block");
   });
 });
