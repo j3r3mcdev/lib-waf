@@ -32,6 +32,7 @@ export interface WafDecision {
   allow: boolean;
   findings: WafFinding[];
   action: "allow" | "block";
+  score: number;
   response?: WafResponse;
 }
 
