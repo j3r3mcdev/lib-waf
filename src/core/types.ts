@@ -31,6 +31,7 @@ export interface WafFinding {
 export interface WafDecision {
   allow: boolean;
   findings: WafFinding[];
+  action: "allow" | "block";
   response?: WafResponse;
 }
 

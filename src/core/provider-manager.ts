@@ -10,7 +10,9 @@ export class ProviderManager {
 
   async initAll() {
     for (const provider of this.providers.values()) {
-      await provider.init();
+      if (provider.init) {
+        await provider.init();
+      }
     }
   }
 
