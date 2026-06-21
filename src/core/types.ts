@@ -12,8 +12,6 @@ export interface WafRequest {
   url: string;
   headers: Record<string, string | string[]>;
   ip?: string;
-
-  // Ajout ici :
   files?: WafUploadedFile[];
 }
 
@@ -28,6 +26,12 @@ export interface WafFinding {
   severity: number;
   message: string;
   meta?: Record<string, unknown>;
+}
+
+export interface WafDecision {
+  allow: boolean;
+  findings: WafFinding[];
+  response?: WafResponse;
 }
 
 export interface WafProvider {
