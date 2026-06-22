@@ -17,7 +17,7 @@ export interface WafRequest {
   body?: any;
   query?: any;
 
-  // 🔥 Permet à Jest de passer des propriétés sans qu'elles soient ignorées
+  // Permet à Jest de passer des propriétés dynamiques
   [key: string]: any;
 }
 
@@ -43,7 +43,13 @@ export interface WafDecision {
 }
 
 export interface WafProvider {
+  name?: string;
+
+  // Optionnel, commun à tous les providers
   init?(): Promise<void>;
+
+  // Permet à chaque provider d’avoir ses propres méthodes
+  [key: string]: any;
 }
 
 export interface WafDetector {

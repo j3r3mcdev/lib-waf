@@ -1,4 +1,4 @@
-import { MockAsnProvider } from "../../src/providers/asn/mock-asn.provider";
+import { MockAsnProvider } from "../../../src/providers/asn/mock-asn.provider";
 
 describe("MockAsnProvider", () => {
   it("retourne l'ASN configuré", async () => {
