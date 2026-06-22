@@ -13,6 +13,10 @@ export interface WafRequest {
   headers: Record<string, string | string[]>;
   ip?: string;
   files?: WafUploadedFile[];
+
+  // AJOUTS NÉCESSAIRES POUR LES DÉTECTEURS AVANCÉS
+  body?: any;
+  query?: any;
 }
 
 export interface WafResponse {
