@@ -29,6 +29,7 @@ describe("Rate Limit Detector", () => {
       headers: {},
     });
 
+    // slashCount > 20 + répétition de '/'
     expect(decision.findings.length).toBeGreaterThanOrEqual(2);
   });
 
