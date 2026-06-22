@@ -14,9 +14,11 @@ export interface WafRequest {
   ip?: string;
   files?: WafUploadedFile[];
 
-  // AJOUTS NÉCESSAIRES POUR LES DÉTECTEURS AVANCÉS
   body?: any;
   query?: any;
+
+  // 🔥 Permet à Jest de passer des propriétés sans qu'elles soient ignorées
+  [key: string]: any;
 }
 
 export interface WafResponse {

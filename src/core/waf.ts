@@ -1,5 +1,6 @@
 import { WafPipeline } from "./pipeline";
 import { WafProvider, WafDetector, WafRequest, WafDecision } from "./types";
+import { WafContext } from "./context";
 
 /**
  * API publique du WAF.
@@ -49,6 +50,18 @@ export class WAF {
         "WAF non initialisé : appelez await waf.init() avant evaluate().",
       );
     }
-    return this.pipeline.run(req);
+
+    // 🔥 NORMALISATION CRITIQUE
+    const normalized: WafRequest = {
+      method: req.method,
+      url: req.url,
+      headers: req.headers || {},
+      ip: req.ip,
+      files: req.files || [],
+      query: req.query || {},
+      body: req.body ?? null, // ← LE POINT QUI MANQUAIT
+    };
+
+    return this.pipeline.run(normalized);
   }
 }
