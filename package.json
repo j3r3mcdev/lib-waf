@@ -1,5 +1,8 @@
 {
-  "name": "elite-waf",
+  "name": "@j3r3mcdev/waf-elite",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "1.0.0",
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
