@@ -1,15 +1,23 @@
+// src/core/types.ts
+
+export interface WafUploadedFile {
+  originalname: string;
+  size: number;
+  mimetype?: string;
+  buffer?: Buffer;
+}
+
 export interface WafRequest {
-  ip: string;
   method: string;
   url: string;
-  headers: Record<string, string | string[] | undefined>;
-  body?: unknown;
-  query?: Record<string, unknown>;
+  headers: Record<string, string | string[]>;
+  ip?: string;
+  files?: WafUploadedFile[];
 }
 
 export interface WafResponse {
-  status?: number;
-  headers?: Record<string, string>;
+  statusCode: number;
+  headers: Record<string, string>;
   body?: unknown;
 }
 
@@ -17,22 +25,24 @@ export interface WafFinding {
   detector: string;
   severity: number;
   message: string;
+  meta?: Record<string, unknown>;
 }
 
 export interface WafDecision {
+  allow: boolean;
+  findings: WafFinding[];
   action: "allow" | "block";
   score: number;
-  findings: WafFinding[];
+  response?: WafResponse;
 }
 
 export interface WafProvider {
-  name: string;
-  init(): Promise<void>;
+  init?(): Promise<void>;
 }
 
 export interface WafDetector {
   name: string;
-  run(ctx: WafContext): Promise<WafFinding[]>;
+  run(ctx: any): Promise<WafFinding[]>;
 }
 
 export interface WafContext {
@@ -41,7 +51,6 @@ export interface WafContext {
 
   findings: WafFinding[];
   metadata: Record<string, unknown>;
-  providers: Map<string, WafProvider>;
 
   addFinding(finding: WafFinding): void;
   addFindings(list: WafFinding[]): void;
