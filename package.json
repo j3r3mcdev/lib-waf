@@ -1,4 +1,5 @@
 {
+  "name": "waf-lib",
   "version": "1.0.1",
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
