@@ -1,6 +1,6 @@
-import { ProviderManager } from "../../src/core/provider-manager";
-import { MockAsnProvider } from "../../src/providers/asn/mock-asn.provider";
-import { AsnProvider } from "../../src/providers/asn/asn.provider";
+import { ProviderManager } from "../../../src/core/provider-manager";
+import { MockAsnProvider } from "../../../src/providers/asn/mock-asn.provider";
+import { AsnProvider } from "../../../src/providers/asn/asn.provider";
 
 describe("ProviderManager + ASN", () => {
   it("charge un provider ASN et effectue une lookup", async () => {

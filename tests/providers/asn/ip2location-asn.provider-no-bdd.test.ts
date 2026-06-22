@@ -4,7 +4,7 @@ jest.mock("ip2location-nodejs", () => {
   };
 });
 
-import { IP2LocationAsnProvider } from "../../src/providers/asn/ip2location.provider";
+import { IP2LocationAsnProvider } from "../../../src/providers/asn/ip2location.provider";
 
 describe("IP2LocationAsnProvider", () => {
   it("échoue si la base ASN est absente", async () => {

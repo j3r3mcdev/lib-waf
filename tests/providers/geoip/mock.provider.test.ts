@@ -1,4 +1,4 @@
-import { MockGeoIpProvider } from "../../src/providers/geoip/mock.provider";
+import { MockGeoIpProvider } from "../../../src/providers/geoip/mock.provider";
 
 describe("MockGeoIpProvider", () => {
   test("init ne plante pas", async () => {

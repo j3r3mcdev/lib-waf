@@ -2,7 +2,7 @@ jest.mock("maxmind", () => {
   throw new Error("Module not found");
 });
 
-import { MaxMindAsnProvider } from "../../src/providers/asn/maxmind.provider";
+import { MaxMindAsnProvider } from "../../../src/providers/asn/maxmind.provider";
 
 describe("MaxMindAsnProvider", () => {
   it("échoue si la lib n'est pas installée", async () => {
