@@ -13,6 +13,12 @@ export interface WafRequest {
   headers: Record<string, string | string[]>;
   ip?: string;
   files?: WafUploadedFile[];
+
+  body?: any;
+  query?: any;
+
+  // 🔥 Permet à Jest de passer des propriétés sans qu'elles soient ignorées
+  [key: string]: any;
 }
 
 export interface WafResponse {

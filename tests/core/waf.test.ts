@@ -13,7 +13,7 @@ class MockGeoProvider implements WafProvider {
 const geoDetector: WafDetector = {
   name: "geo-detector",
   run: async (ctx) => {
-    const geo = ctx.getProvider<MockGeoProvider>("geo");
+    const geo = ctx.getProvider("geo") as MockGeoProvider;
     const info = await geo?.lookup("1.1.1.1");
 
     if (info?.countryCode === "FR") {
