@@ -1,4 +1,4 @@
-import { IP2LocationGeoIpProvider } from "../../src/providers/geoip/ip2location.provider";
+import { IP2LocationGeoIpProvider } from "../../../src/providers/geoip/ip2location.provider";
 
 describe("IP2LocationGeoIpProvider", () => {
   test("init échoue si la lib n'est pas installée", async () => {

@@ -2,7 +2,7 @@ jest.mock("ip2location-nodejs", () => {
   throw new Error("Module not found");
 });
 
-import { IP2LocationAsnProvider } from "../../src/providers/asn/ip2location.provider";
+import { IP2LocationAsnProvider } from "../../../src/providers/asn/ip2location.provider";
 
 describe("IP2LocationAsnProvider", () => {
   it("échoue si la lib n'est pas installée", async () => {
