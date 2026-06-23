@@ -1,5 +1,5 @@
 {
-  "name": "@j3r3mcdev/waf-elite",
+  "name": "waf-elite",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
