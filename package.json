@@ -1,5 +1,5 @@
 {
-  "name": "elite-blf",
+  "name": "elite-waf-blf",
   "version": "1.0.4",
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
