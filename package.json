@@ -4,10 +4,30 @@
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j3r3mcdev/lib-waf.git"
+  },
+  "homepage": "https://github.com/j3r3mcdev/lib-waf#readme",
+  "bugs": {
+    "url": "https://github.com/j3r3mcdev/lib-waf/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
