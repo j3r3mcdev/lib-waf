@@ -38,7 +38,7 @@
     "sanity:lite": "node sanity-check.cjs --no-git",
     "prepush": "npm run sanity:lite",
     "prepare": "husky",
-    "release:patch": "npm version patch && npm run build && npm run sanity:lite && git push --follow-tags && npm publish --access public && npm publish --registry=https://npm.pkg.github.com"
+    "release:patch": "npm version patch && npm run build && npm run sanity:lite && git push --follow-tags && npm publish --access public --registry=https://registry.npmjs.org/ && npm publish --registry=https://npm.pkg.github.com"
   },
   "keywords": [
     "waf",
