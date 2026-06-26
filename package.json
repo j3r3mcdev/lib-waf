@@ -1,6 +1,6 @@
 {
   "name": "@j3r3mcdev/lib-waf-blf",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
