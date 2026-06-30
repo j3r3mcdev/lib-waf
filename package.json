@@ -23,8 +23,7 @@
     "url": "https://github.com/j3r3mcdev/lib-waf/issues"
   },
   "publishConfig": {
-    "access": "public",
-    "@j3r3mcdev:registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "engines": {
     "node": ">=18"
