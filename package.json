@@ -1,5 +1,5 @@
 {
-  "name": "lib-waf-blf",
+  "name": "@j3r3mcdev/lib-waf-blf",
   "version": "1.0.19",
   "description": "Advanced modular WAF library with detectors, pipeline, providers and multi-framework middleware.",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     "url": "https://github.com/j3r3mcdev/lib-waf/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "@j3r3mcdev:registry": "https://npm.pkg.github.com"
   },
   "engines": {
     "node": ">=18"
@@ -38,7 +38,7 @@
     "sanity:lite": "node sanity-check.cjs --no-git",
     "prepush": "npm run sanity:lite",
     "prepare": "husky",
-    "release:patch": "npm version patch && npm run build && npm run sanity:lite && git push --follow-tags && npm publish --access public"
+    "release:patch": "npm version patch && npm run sanity:lite && git push --follow-tags && npm publish"
   },
   "keywords": [
     "waf",
